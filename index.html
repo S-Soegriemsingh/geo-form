@@ -16,6 +16,8 @@
 
     Nadat het formulier is ingevuld en gevalideerd is kan de data weggeschreven worden naar
     een dummy URL, bijvoorbeeld: http://mockbin.org/.
+
+    Start: 12:10
 -->
 
 <!DOCTYPE html>
@@ -25,9 +27,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/style.min.css">
-    <title>Project Template</title>
+    <script src="/assets/js/PostalCheck.js"></script>
+    <title>Incentronauten formulier</title>
 </head>
 <body>
-
+    <main class="container">
+        <form class="form">
+            <!-- Verplicht -->
+            <label class="form__label">
+                Voornaam
+                <input type="text" class="form__input" required>
+            </label>
+            <label class="form__label">
+                Tussenvoegsel
+                <input type="text" class="form__input">
+            </label>
+            <!-- Verplicht -->
+            <label class="form__label">
+                Achternaam
+                <input type="text" class="form__input" required>
+            </label>
+            <!-- Verplicht / Validatiecheck -->
+            <label class="form__label">
+                Postcode
+                <input type="text" class="form__input" required>
+            </label>
+            <!-- Verplicht / Validatiecheck / Alleen nummers -->
+            <label class="form__label">
+                Huisnummer
+                <input type="number" class="form__input" required>
+            </label>
+            <!-- Fire postal check -->
+            <a href="#" class="form__button js-postal-check">
+                Check
+            </a>
+            <!-- Ophalen -->
+            <label class="form__label">
+                Straatnaam
+                <input type="text" class="form__input" disabled>
+            </label>
+            <!-- Ophalen -->
+            <label class="form__label">
+                Stad
+                <input type="text" class="form__input" disabled>
+            </label>
+            <!-- Verplicht / Validatiecheck -->
+            <label class="form__label">
+                E-mail
+                <input type="text" class="form__input">
+            </label>
+            <input type="submit" class="form__button js-submit-form" value="Submit">
+        </form>
+    </main>
 </body>
 </html>
