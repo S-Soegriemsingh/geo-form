@@ -1,0 +1,15 @@
+:root {
+    // Neutral
+    --color-dark-500: hsl(0, 0%, 11%);
+    --color-light-500: hsl(0, 0%, 100%);
+    --color-gray-500: hsl(0, 0%, 80%);
+
+    // Orange
+    --color-orange-400: hsl(19, 50%, 50%);
+    --color-orange-500: hsl(19, 100%, 50%);
+
+    // Base
+    --color-base: var(--color-dark-500);
+    --color-button: var(--color-dark-500);
+    --color-font: var(--color-light-500);
+}

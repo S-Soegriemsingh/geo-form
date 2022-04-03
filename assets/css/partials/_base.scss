@@ -1,0 +1,11 @@
+body {
+    // Overwrite vars based on preference
+    @media (prefers-color-scheme: light) {
+        --color-base: var(--color-light-500);
+        --color-button: var(--color-light-500);
+        --color-font: var(--color-dark-500);
+    }
+
+    background-color: var(--color-base);
+    color: var(--color-font);
+}
