@@ -13,9 +13,17 @@
     border-style: solid;
     border-radius: 10px;
 
-    &__input-container {
+    &__text-container,
+    &__input-container,
+    &__button-container {
         position: relative;
-        margin: .5rem;
+        margin: .75rem;
+        flex-grow: 1;
+    }
+
+    &__button-container {
+        display: flex;
+        justify-content: flex-end;
     }
 
     &__input {
@@ -25,6 +33,7 @@
         border-style: solid;
         border-radius: 5px;
         padding: .5rem 1.5rem;
+        width: 100%;
 
         &:focus {
             outline: none;

@@ -17,9 +17,12 @@
     Nadat het formulier is ingevuld en gevalideerd is kan de data weggeschreven worden naar
     een dummy URL, bijvoorbeeld: http://mockbin.org/.
 
-    Start: 12:10 - 14:10
-    Start: 08:00 - 08:20
-    Start: 08:35 - 09:35
+    Start: 12:10 - 14:10 =  2 uur
+    Start: 08:00 - 08:20 = 20 min
+    Start: 08:35 - 09:35 =  1 uur
+    Start: 07:35 -
+
+    Total: 3 uur 20 min
 -->
 
 <!DOCTYPE html>
@@ -39,6 +42,15 @@
             <circle data-animation="erase-circle" cx="406.4" cy="41.9" r="24.8" fill="none" stroke="#fe5000" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"/>
         </svg>
         <form class="form">
+            <div class="form__text-container">
+                <p class="form__text">
+                    Incentronaut, get ready for the launch!
+                </p>
+                <p class="form__text">
+                    Gefeliciteerd met het behalen van deze stap. Het enige wat nog rest is het verzamelen van je gegevens. Dus vul ze snel in en bereid je voor op de rit van je leven!
+                </p>
+            </div>
+
             <!-- Verplicht -->
             <div class="form__input-container">
                 <input type="text" id="initials" class="form__input" placeholder=" " required>
@@ -80,10 +92,14 @@
                     Huisnummer
                 </label>
             </div>
-            <!-- Fire postal check -->
-            <a href="#" class="form__button js-postal-check">
-                Check
-            </a>
+
+            <div class="form__text-container">
+                <p class="form__text js-address">
+                    Na het invullen van je postcode en huisnummer, klik je op de <strong>Check</strong> button.
+                </p>
+            </div>
+
+
             <!-- Ophalen -->
             <!-- <label class="form__label">
                 Straatnaam
@@ -94,9 +110,16 @@
                 Stad
                 <input type="text" class="form__input" disabled>
             </label> -->
-            <button type="submit" class="form__button js-submit-form">
-                Submit
-            </button>
+
+            <!-- Fire postal check -->
+            <div class="form__button-container">
+                <a href="#" class="form__button js-postal-check">
+                    Check
+                </a>
+                <button type="submit" class="form__button js-submit-form">
+                    Submit
+                </button>
+            </div>
         </form>
     </main>
 </body>
