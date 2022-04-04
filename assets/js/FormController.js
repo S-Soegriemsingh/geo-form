@@ -2,15 +2,21 @@ class FormController {
     #apiEndpoint = "https://nominatim.openstreetmap.org/";
     #apiResponseLimit = "limit=1";
     #apiResponseFormat = "format=json";
+    #apiResponseDetail = "addressdetails=1";
 
     #country = "country=nl";
-    #street = "street=49";
-    #postalcode = "postalcode=3076zb";
+    #housenumber = null;
+    #postalcode = null;
 
     #xhrObject = null;
 
+    #postalcodeElement = null;
+    #housenumberElement = null;
+    #responseElement = null;
     #checkElement = null;
     #submitElement = null;
+
+    #validAddress = false;
 
     constructor()
     {
@@ -35,6 +41,9 @@ class FormController {
     {
         console.log("FormController - prepareElements");
 
+        this.#postalcodeElement = document.querySelector(".js-postalcode");
+        this.#housenumberElement = document.querySelector(".js-housenumber");
+        this.#responseElement = document.querySelector(".js-address");
         this.#checkElement = document.querySelector(".js-postal-check");
         this.#submitElement = document.querySelector(".js-submit-form");
     }
@@ -46,6 +55,10 @@ class FormController {
         this.#checkElement.addEventListener('click', (event) => {
             this.handleCheckEvent(event);
         });
+
+        this.#submitElement.addEventListener('submit', (event) => {
+            this.handleSubmitEvent(event);
+        });
     }
 
     handleCheckEvent(event)
@@ -54,23 +67,55 @@ class FormController {
 
         event.preventDefault();
 
-        // const url = "https://nominatim.openstreetmap.org/?postalcode=3076zb&format=json&limit=1";
-        // const url = "https://nominatim.openstreetmap.org/?postalcode=3076zb&country=nl&street=49&format=json&limit=1";
-        const url = "https://nominatim.openstreetmap.org/?postalcode=3071jk&country=nl&format=json&addressdetails=1";
-        // const url = this.#apiEndpoint
-        //     + "?"
-        //     + this.#postalcode
-        //     + "&"
-        //     + this.#street
-        //     + "&"
-        //     + this.#country
-        //     + "&"
-        //     + this.#apiResponseFormat
-        //     + "&"
-        //     + this.#apiResponseLimit
-        // ;
+        if (this.validatePostalcode() && this.validateHousenumber()) {
+            this.#postalcode = this.#postalcodeElement.value;
+            this.#housenumber = this.#housenumberElement.value;
+        } else {
+            this.displayError("Vul een correcte postcode en huisnummer in.");
+        }
 
-        console.log("FormController - handleCheckEvent url", url);
+        this.sendRequest();
+    }
+
+    validatePostalcode()
+    {
+        // https://stackoverflow.com/a/17898538
+        const validRegex = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i;
+
+        if (validRegex.test(postalcode.value) && housenumber.value) {
+            return true;
+        }
+
+        return false;
+    }
+
+    validateHousenumber()
+    {
+        if (housenumber.value) {
+            return true;
+        }
+
+        return false;
+    }
+
+    sendRequest()
+    {
+        const url = this.#apiEndpoint
+            + "?"
+            + "postalcode="
+            + this.#postalcode
+            + "&"
+            + "street="
+            + this.#housenumber
+            + "&"
+            + this.#country
+            + "&"
+            + this.#apiResponseFormat
+            + "&"
+            + this.#apiResponseLimit
+            + "&"
+            + this.#apiResponseDetail
+        ;
 
         this.#xhrObject.open(
             "GET",
@@ -83,10 +128,36 @@ class FormController {
     handleResponse(response)
     {
         console.log("FormController - handleResponse");
-
         const jsonResponse = JSON.parse(response);
 
-        console.log("FormController - json", jsonResponse);
+        console.log("FormController - handleResponse jsonResponse", jsonResponse);
+
+        if (jsonResponse.length) {
+            const address = jsonResponse[0].address.city + " " + jsonResponse[0].address.road;
+            this.#responseElement.innerHTML = address;
+            this.#validAddress = true;
+        } else {
+            this.#validAddress = false;
+            this.displayError("Er ging iets mis met het ophalen van het adres, controleer de postcode en huisnummer en probeer het opnieuw.");
+        }
+    }
+
+    handleSubmitEvent(event)
+    {
+        console.log("FormController - handleSubmitEvent");
+
+        event.preventDefault();
+
+        if (this.#validAddress) {
+            console.log("got here");
+        } else {
+            this.displayError("Het adres moet nog gecontroleerd worden.");
+        }
+    }
+
+    displayError(message)
+    {
+        this.#responseElement.innerHTML = message;
     }
 }
 

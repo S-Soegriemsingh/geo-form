@@ -40,7 +40,7 @@
             border-color: var(--color-orange-400);
 
             & + .form__label {
-                top: -.75rem;
+                top: var(--label-offset);
                 background-color: var(--color-base);
             }
         }
@@ -48,13 +48,15 @@
         &:not(:placeholder-shown) {
 
             & + .form__label {
-                top: -.75rem;
+                top: var(--label-offset);
                 background-color: var(--color-base);
             }
         }
     }
 
     &__label {
+        --label-offset: -.75rem;
+
         position: absolute;
         top: .5rem;
         left: 1rem;
@@ -63,6 +65,10 @@
             top 250ms,
             background-color 250ms
         ;
+    }
+
+    &__text {
+        margin-bottom: 1rem;
     }
 
     &__button {
