@@ -40,7 +40,7 @@
             border-color: var(--color-orange-400);
 
             & + .form__label {
-                top: -1rem;
+                top: -.75rem;
                 background-color: var(--color-base);
             }
         }
