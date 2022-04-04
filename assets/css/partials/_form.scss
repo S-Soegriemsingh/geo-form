@@ -48,7 +48,7 @@
         &:not(:placeholder-shown) {
 
             & + .form__label {
-                top: -1rem;
+                top: -.75rem;
                 background-color: var(--color-base);
             }
         }
@@ -89,6 +89,10 @@
         &:focus {
             background-color: var(--color-base);
             color: var(--color-orange-500);
+        }
+
+        &:first-child {
+            margin-right: 1rem;
         }
     }
 }
